@@ -17,13 +17,14 @@ builds, so they never appear to visitors.
 
 Everything is a plain text file. No code required to change the content.
 
-| What                               | File              |
-| ---------------------------------- | ----------------- |
-| Home page, the vision, the values  | `_pages/about.md` |
-| Opening hours, address, contact    | `_pages/visit.md` |
-| The four offerings                 | `_offerings/`     |
-| Short updates on the home page     | `_news/`          |
-| Site name, contact links, settings | `_config.yml`     |
+| What                               | File                 |
+| ---------------------------------- | -------------------- |
+| Home page, the vision, the values  | `_pages/about.md`    |
+| Opening hours, address, contact    | `_pages/visit.md`    |
+| The four offerings                 | `_offerings/`        |
+| Shop stock and prices              | `_data/products.yml` |
+| Short updates on the home page     | `_news/`             |
+| Site name, contact links, settings | `_config.yml`        |
 
 Each file starts with a block between `---` lines. That's settings. Everything
 below it is the page text, written in Markdown — `**bold**`, `_italic_`,
@@ -45,9 +46,47 @@ small pill on the card — use it for "Open", "By appointment", "Coming soon".
 - [ ] Replace every _to be confirmed_ on `_pages/visit.md`
 - [ ] Fill in contact details in `_config.yml` — icons appear automatically
 - [ ] Set `url:` in `_config.yml` to the real domain
-- [ ] Check the support-service phone numbers on the safe space page are current
 - [ ] Rewrite the vision on the home page in Iryna's own voice
 - [ ] Swap the leaf artwork for photographs, if there are any (see below)
+
+## Payments
+
+The shop takes payment through **Stripe Payment Links**. Checkout happens on a
+page hosted by Stripe, which is what makes this work on a static site at all:
+Apple Pay's own JavaScript API needs a server to validate a merchant session
+with Apple on every transaction, and GitHub Pages has no server. Going through
+Stripe's hosted checkout sidesteps that entirely — Apple Pay, Google Pay and
+cards all work, with no backend and no domain verification.
+
+To start selling an item:
+
+1. In the Stripe Dashboard, create a **product** and then a **Payment Link** for it
+2. Copy the link (it looks like `https://buy.stripe.com/xxxx`)
+3. Paste it into that item's `checkout_url` in `_data/products.yml`
+4. Set the real `price` in the same file — Stripe holds the figure that is
+   actually charged, so **these two must be kept in step by hand**
+
+Items with a blank `checkout_url` show "Ask in store" rather than a buy button,
+so stock can be listed before it is set up to sell online.
+
+Apple Pay appears automatically at checkout for anyone on an Apple device with a
+card in Wallet. Nothing needs enabling in this repository for that.
+
+### Before taking the first payment
+
+- [ ] A returns policy on the shop page — UK and EU distance selling generally
+      gives customers 14 days to change their mind
+- [ ] Delivery and collection terms
+- [ ] Whether VAT applies, and whether prices include it
+- [ ] A privacy notice covering Stripe as a payment processor
+
+### If you ever want the pay button on this site rather than Stripe's page
+
+That needs Stripe Elements and a server to validate the Apple Pay merchant
+session, so GitHub Pages would no longer be enough. You would also have to serve
+Stripe's verification file at `/.well-known/apple-developer-merchantid-domain-association`
+— `.well-known` is already listed in `include:` in `_config.yml`, because Jekyll
+skips dot-directories by default and would otherwise drop the file silently.
 
 ## Artwork
 

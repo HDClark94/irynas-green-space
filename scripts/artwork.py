@@ -209,16 +209,25 @@ def tile_sound(ax, W, H):
               alpha=0.38, z=5, lw=1.4)
 
 
-def tile_space(ax, W, H):
-    # Leaves curving inward - an enclosure, something held.
-    for i, angle in enumerate([150, 110, 70, 30]):
-        draw_leaf(ax, (W / 2, H * 0.1), np.deg2rad(angle), H * 0.74,
-                  GREENS[i % len(GREENS)], alpha=0.26, z=i, lw=1.2, width=0.3)
+def tile_instruments(ax, W, H):
+    # Nested ellipses - the rim of a singing bowl seen at an angle - with a leaf
+    # rising from it, so it stays in the same botanical language as the others.
+    import matplotlib.patches as mpatches
+
+    for i, k in enumerate([1.0, 0.72, 0.46]):
+        ax.add_patch(mpatches.Ellipse(
+            (W / 2, H * 0.42), W * 0.74 * k, H * 0.30 * k,
+            fill=False, edgecolor=GREENS[i], lw=1.5, alpha=0.5, zorder=i))
+    ax.add_patch(mpatches.Arc(
+        (W / 2, H * 0.42), W * 0.74, H * 0.30, theta1=182, theta2=358,
+        edgecolor=GREENS[0], lw=1.6, alpha=0.75, zorder=4))
+    draw_leaf(ax, (W / 2, H * 0.46), np.deg2rad(90), H * 0.42, GREENS[2],
+              alpha=0.34, z=6, lw=1.3)
 
 
 def tiles():
     for name, fn in [("refill", tile_refill), ("laundry", tile_laundry),
-                     ("sound", tile_sound), ("space", tile_space)]:
+                     ("sound", tile_sound), ("instruments", tile_instruments)]:
         W = H = 3.0
         fig, ax = new_axes(W, H)
         fn(ax, W, H)

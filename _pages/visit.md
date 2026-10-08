@@ -4,7 +4,7 @@ permalink: /visit/
 title: visit
 description: Where to find us, when we are open, and how to get in touch.
 nav: true
-nav_order: 2
+nav_order: 3
 ---
 
 ## Opening hours

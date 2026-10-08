@@ -8,10 +8,10 @@ middle_name:
 last_name: Green Space
 email: # add a contact address, or leave blank to hide the icon
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A refill shop, eco laundry, sound therapy room and safe space — one place to
-  buy what you need without the packaging, wash gently, rest, and be welcome.
+  A refill shop, eco laundry, sound therapy room and a small collection of
+  singing bowls and instruments from Nepal.
 footer_text: >
-keywords: refill shop, zero waste, eco laundry, sound therapy, community space, sustainable living
+keywords: refill shop, zero waste, eco laundry, sound therapy, singing bowls, Nepalese instruments, sound healing, sustainable living
 lang: en
 # Favicon links are declared directly in _includes/head.liquid, since the set
 # needs both SVG and PNG - see scripts/favicon.py.
@@ -103,7 +103,7 @@ kramdown:
       line_numbers: false
       start_line: 1
 
-include: ["_pages"]
+include: ["_pages", ".well-known"]
 exclude:
   - Gemfile
   - Gemfile.lock

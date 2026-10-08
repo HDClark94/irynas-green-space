@@ -1,0 +1,53 @@
+# The shop.
+#
+# checkout_url is a Stripe Payment Link. Leave it blank and the card shows
+# "Ask in store" instead of a buy button, so an item can be listed before it is
+# set up to sell online. See the Payments section of README.md.
+#
+# image is optional and looks in assets/img/shop/.
+
+- name: Hand-hammered singing bowl
+  note: Medium, around 18 cm
+  description: >
+    Hammered by hand in the Kathmandu valley. Deep, long sustain with a slow
+    beat. Comes with a suede mallet and a ring cushion.
+  price: "To be confirmed"
+  origin: Nepal
+  checkout_url:
+
+- name: Small singing bowl
+  note: Around 12 cm
+  description: >
+    Higher and brighter than the medium. Light enough to hold in the palm while
+    it rings, which is how most people prefer to use one.
+  price: "To be confirmed"
+  origin: Nepal
+  checkout_url:
+
+- name: Tingsha cymbals
+  description: >
+    A bonded pair on a leather cord. Struck to open and close a session; the
+    note carries much further than the size suggests.
+  price: "To be confirmed"
+  origin: Nepal
+  checkout_url:
+
+- name: Suede mallet
+  description: >
+    For rimming a bowl rather than striking it. A different voice from the
+    wooden striker, and gentler on the rim.
+  price: "To be confirmed"
+  checkout_url:
+
+- name: Ring cushion
+  description: >
+    Woven cushion so a bowl can sit and ring freely without being damped by the
+    surface underneath it.
+  price: "To be confirmed"
+  checkout_url:
+
+- name: Incense and holder
+  description: >
+    Rolled incense and a simple wooden holder.
+  price: "To be confirmed"
+  checkout_url:

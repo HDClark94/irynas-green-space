@@ -49,6 +49,22 @@ small pill on the card — use it for "Open", "By appointment", "Coming soon".
 - [ ] Rewrite the vision on the home page in Iryna's own voice
 - [ ] Swap the leaf artwork for photographs, if there are any (see below)
 
+## Map
+
+A map sits above the footer on every page, configured under `map:` in
+`_config.yml`. **The coordinates are a placeholder — Tavira in the Algarve.**
+Replace `lat` and `lng` with the real address before launch: right-click the
+spot in Google Maps and the coordinates are the first item in the menu.
+
+`provider` accepts `google` or `osm`. Google is the default because it is what
+most visitors expect, but worth knowing: the embed loads Google resources and
+sets cookies on every page view, with no consent step. That is the same GDPR
+problem that led to the fonts being self-hosted here, and it applies more
+strongly to a map on every page. Switching to `osm` is a one-word change,
+needs no API key, and sends nothing to Google.
+
+Set `enabled: false` to remove it entirely.
+
 ## Payments
 
 The shop takes payment through **Stripe Payment Links**. Checkout happens on a

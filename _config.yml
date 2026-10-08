@@ -67,6 +67,29 @@ google_site_verification:
 bing_site_verification:
 
 # -----------------------------------------------------------------------------
+# Map
+# -----------------------------------------------------------------------------
+# Shown above the footer on every page.
+#
+# PLACEHOLDER LOCATION: Tavira, Algarve. Replace lat/lng with the real address
+# before launch - right-click the spot in Google Maps and the coordinates are
+# the first item in the menu.
+#
+# provider: "google" or "osm". Google is the default because it is what most
+# visitors expect, but the embed loads Google resources and sets cookies on
+# every page view, with no consent step - a GDPR problem for a business in the
+# EU. Switching to "osm" is a one-word change and sends nothing to Google.
+
+map:
+  enabled: true
+  provider: google
+  lat: 37.1264
+  lng: -7.6506
+  zoom: 15
+  heading: Find us
+  label: Tavira, Algarve — placeholder location
+
+# -----------------------------------------------------------------------------
 # Collections
 # -----------------------------------------------------------------------------
 

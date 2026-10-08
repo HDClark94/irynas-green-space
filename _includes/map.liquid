@@ -1,0 +1,50 @@
+{% if site.map.enabled %}
+  {% assign lat = site.map.lat %}
+  {% assign lng = site.map.lng %}
+  {% assign zoom = site.map.zoom | default: 14 %}
+
+  <section class="map-band">
+    {% if site.map.heading %}
+      <h2 class="map-heading">{{ site.map.heading }}</h2>
+    {% endif %}
+
+    <div class="map-frame">
+      {% if site.map.provider == 'osm' %}
+        {% comment %}
+          OpenStreetMap: no API key, no tracking, no cookies. The bbox is a
+          rough window around the point - OSM has no zoom parameter for embeds.
+        {% endcomment %}
+        {% assign span = 0.012 %}
+        {% assign west = lng | minus: span %}
+        {% assign east = lng | plus: span %}
+        {% assign south = lat | minus: span %}
+        {% assign north = lat | plus: span %}
+        <iframe
+          title="Map showing {{ site.map.label | default: site.title }}"
+          src="https://www.openstreetmap.org/export/embed.html?bbox={{ west }},{{ south }},{{ east }},{{ north }}&layer=mapnik&marker={{ lat }},{{ lng }}"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      {% else %}
+        {% comment %}
+          Google's keyless embed. Note this loads Google resources on every page
+          view - see the Map section of README.md before launch.
+        {% endcomment %}
+        <iframe
+          title="Map showing {{ site.map.label | default: site.title }}"
+          src="https://maps.google.com/maps?q={{ lat }},{{ lng }}&z={{ zoom }}&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      {% endif %}
+    </div>
+
+    <p class="map-meta">
+      {% if site.map.label -%}
+        <span>{{ site.map.label }}</span>
+      {%- endif %}
+      <a href="https://www.google.com/maps/search/?api=1&query={{ lat }},{{ lng }}">Open in Maps</a>
+      <a href="https://www.openstreetmap.org/?mlat={{ lat }}&mlon={{ lng }}#map={{ zoom }}/{{ lat }}/{{ lng }}">OpenStreetMap</a>
+    </p>
+  </section>
+{% endif %}

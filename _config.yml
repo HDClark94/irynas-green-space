@@ -1,0 +1,205 @@
+# -----------------------------------------------------------------------------
+# Site settings
+# -----------------------------------------------------------------------------
+
+title: Iryna's Green Space # shown in the navbar and browser tab
+first_name: Iryna's
+middle_name:
+last_name: Green Space
+email: # add a contact address, or leave blank to hide the icon
+description: > # the ">" symbol means to ignore newlines until "footer_text:"
+  A refill shop, eco laundry, sound therapy room and safe space — one place to
+  buy what you need without the packaging, wash gently, rest, and be welcome.
+footer_text: >
+keywords: refill shop, zero waste, eco laundry, sound therapy, community space, sustainable living
+lang: en
+icon: leaf_icon.svg # favicon, from assets/img/
+url: https://hdclark94.github.io # change to the final domain before launch
+# baseurl: project-repo vs user-site, see README. For a repo served at
+#   <user>.github.io/irynas-green-space, set: baseurl: /irynas-green-space
+# For a dedicated <name>.github.io repo or a custom domain, leave it blank.
+baseurl:
+last_updated: false
+impressum_path:
+
+# -----------------------------------------------------------------------------
+# Layout
+# -----------------------------------------------------------------------------
+
+navbar_fixed: true
+footer_fixed: False
+max_width: 860px
+
+# -----------------------------------------------------------------------------
+# Open Graph & Schema.org
+# -----------------------------------------------------------------------------
+
+serve_og_meta: true # link previews matter a lot more for a shop than for a CV
+serve_schema_org: false
+og_image: # set to a photo once there is one, e.g. /assets/img/banner-light.svg
+
+# -----------------------------------------------------------------------------
+# Social / contact
+# -----------------------------------------------------------------------------
+# Fill in what applies. Anything left blank simply does not appear.
+
+instagram_id:
+facebook_id:
+whatsapp_number:
+telegram_username:
+youtube_id:
+work_url:
+github_username:
+linkedin_username:
+x_username:
+mastodon_username:
+
+contact_note: >
+
+# -----------------------------------------------------------------------------
+# Analytics
+# -----------------------------------------------------------------------------
+
+google_analytics:
+cronitor_analytics:
+google_site_verification:
+bing_site_verification:
+
+# -----------------------------------------------------------------------------
+# Collections
+# -----------------------------------------------------------------------------
+
+collections:
+  news:
+    defaults:
+      layout: post
+    output: true
+    permalink: /news/:path/
+  offerings:
+    defaults:
+      layout: page
+    output: true
+    permalink: /offerings/:path/
+
+announcements:
+  enabled: true
+  scrollable: true
+  limit: 5
+
+# -----------------------------------------------------------------------------
+# Jekyll settings
+# -----------------------------------------------------------------------------
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+      start_line: 1
+
+include: ["_pages"]
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - scripts
+  - Makefile
+keep_files:
+  - CNAME
+  - .nojekyll
+  - .git
+
+plugins:
+  - jekyll-email-protect
+  - jekyll-imagemagick
+  - jekyll-link-attributes
+  - jekyll-minifier
+  - jekyll-sitemap
+  - jekyll-toc
+  - jemoji
+
+defaults:
+  - scope:
+      path: "assets"
+    values:
+      sitemap: false
+
+sass:
+  style: compressed
+
+# -----------------------------------------------------------------------------
+# Jekyll Minifier
+# -----------------------------------------------------------------------------
+
+jekyll-minifier:
+  exclude: ["robots.txt"]
+  uglifier_args:
+    harmony: true
+
+# -----------------------------------------------------------------------------
+# Jekyll Link Attributes
+# -----------------------------------------------------------------------------
+
+external_links:
+  enabled: true
+  rel: external nofollow noopener
+  target: _blank
+  exclude:
+
+# -----------------------------------------------------------------------------
+# Responsive WebP Images
+# -----------------------------------------------------------------------------
+# Needs ImageMagick installed. Only applies to raster photos in assets/img/;
+# the generated SVG artwork is untouched.
+
+imagemagick:
+  enabled: true
+  widths:
+    - 480
+    - 800
+    - 1400
+  input_directories:
+    - assets/img/
+  input_formats:
+    - ".jpg"
+    - ".jpeg"
+    - ".png"
+    - ".tiff"
+  output_formats:
+    webp: "-quality 85"
+
+# -----------------------------------------------------------------------------
+# Optional Features
+# -----------------------------------------------------------------------------
+
+enable_google_analytics: false
+enable_cronitor_analytics: false
+enable_google_verification: false
+enable_bing_verification: false
+enable_math: false # no equations on this site
+enable_tooltips: false
+enable_darkmode: true
+enable_navbar_social: false
+enable_medium_zoom: true
+enable_progressbar: true
+
+# -----------------------------------------------------------------------------
+# Library versions
+# -----------------------------------------------------------------------------
+
+jquery:
+  version: "3.6.0"
+  integrity: "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+mdb:
+  version: "4.20.0"
+  integrity:
+    css: "sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw="
+    js: "sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA="
+medium_zoom:
+  version: "1.0.8"
+  integrity: "sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8="

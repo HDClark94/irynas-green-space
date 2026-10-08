@@ -1,0 +1,8 @@
+# Python dependencies for the artwork generator.
+# Not needed to build or serve the site - only to regenerate the SVGs.
+#
+#   python3 -m venv .venv && source .venv/bin/activate
+#   pip install -r scripts/requirements.txt
+
+matplotlib>=3.6
+numpy>=1.24

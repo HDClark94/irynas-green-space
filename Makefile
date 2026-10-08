@@ -9,13 +9,16 @@
 
 PYTHON ?= python3
 
-.PHONY: help art serve build format check clean
+.PHONY: help art photos serve build format check clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-8s\033[0m %s\n", $$1, $$2}'
 
 art: ## Regenerate banner, logo, favicon and offering tiles
 	$(PYTHON) scripts/artwork.py
+
+photos: ## Rebuild responsive WebP variants for photographs in assets/img/
+	$(PYTHON) scripts/photos.py
 
 serve: ## Serve locally at http://localhost:4000 (needs Ruby 3.x + ImageMagick)
 	bundle exec jekyll serve --livereload

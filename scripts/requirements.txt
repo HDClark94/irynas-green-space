@@ -6,3 +6,4 @@
 
 matplotlib>=3.6
 numpy>=1.24
+pillow>=10.0   # responsive WebP variants, scripts/photos.py

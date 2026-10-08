@@ -12,22 +12,22 @@ $blue-color-dark: #00369f !default;
 $cyan-color: #2698ba !default;
 $light-cyan-color: lighten($cyan-color, 25%);
 $green-color: #00ab37 !default;
-// Earth tones. Light mode is warm paper and clay; dark mode is damp soil and
-// moss rather than neutral grey, so the greens sit in the same family as the
-// backgrounds instead of floating on top of them.
-$leaf-color: #2f7d4f !default; // accent, light mode
-$leaf-color-soft: #83c79c !default; // accent, dark mode
+// Earth tones: tan by day, soil by night.
+// Foregrounds are darkened/lightened to suit the surfaces rather than inherited
+// from the theme, so every pair clears WCAG AA (worst is 5.57:1).
+$leaf-color: #235c39 !default; // accent on tan
+$leaf-color-soft: #8fd0a6 !default; // accent on soil
 
-$paper-color: #faf7f1 !default; // warm off-white page
-$paper-raised: #f3eee4 !default; // cards, code blocks
-$bark-color: #2a2521 !default; // dark page
-$bark-raised: #35302a !default; // dark cards
-$ink-color: #2e2a26 !default; // body text, light mode
-$ink-muted: #6b6258 !default; // secondary text, light mode
-$ink-inverse: #ece5da !default; // body text, dark mode
-$ink-inverse-muted: #a79c8e !default; // secondary text, dark mode
-$clay-divider: #e2d9ca !default;
-$bark-divider: #464038 !default;
+$tan-color: #e6d7bd !default; // day page
+$tan-raised: #f0e4ce !default; // day cards, raised surfaces
+$soil-color: #2b2219 !default; // night page
+$soil-raised: #362b20 !default; // night cards
+$ink-color: #2b2620 !default;
+$ink-muted: #564d40 !default;
+$ink-inverse: #ece3d4 !default;
+$ink-inverse-muted: #b3a692 !default;
+$clay-divider: #cdbb9b !default;
+$bark-divider: #473a2a !default;
 $green-color-lime: #b7d12a !default;
 $green-color-dark: #009f06 !default;
 $green-color-light: #ddffdd !default;

@@ -13,7 +13,8 @@ description: > # the ">" symbol means to ignore newlines until "footer_text:"
 footer_text: >
 keywords: refill shop, zero waste, eco laundry, sound therapy, community space, sustainable living
 lang: en
-icon: leaf_icon.svg # favicon, from assets/img/
+# Favicon links are declared directly in _includes/head.liquid, since the set
+# needs both SVG and PNG - see scripts/favicon.py.
 url: https://hdclark94.github.io # change to the final domain before launch
 # baseurl: project-repo vs user-site, see README. For a repo served at
 #   <user>.github.io/irynas-green-space, set: baseurl: /irynas-green-space

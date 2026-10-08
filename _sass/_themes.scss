@@ -3,19 +3,19 @@
  ******************************************************************************/
 
 :root {
-  --global-bg-color: #{$paper-color};
-  --global-code-bg-color: #{$paper-raised};
+  --global-bg-color: #{$tan-color};
+  --global-code-bg-color: #{$tan-raised};
   --global-text-color: #{$ink-color};
   --global-text-color-light: #{$ink-muted};
   --global-theme-color: #{$leaf-color};
   --global-hover-color: #{$purple-color};
   --global-hover-text-color: #{$white-color};
-  --global-footer-bg-color: #{$grey-color-dark};
-  --global-footer-text-color: #{$grey-color-light};
-  --global-footer-link-color: #{$white-color};
+  --global-footer-bg-color: #{$soil-color};
+  --global-footer-text-color: #{$ink-inverse-muted};
+  --global-footer-link-color: #{$ink-inverse};
   --global-distill-app-color: #{$grey-color};
   --global-divider-color: #{$clay-divider};
-  --global-card-bg-color: #{$paper-raised};
+  --global-card-bg-color: #{$tan-raised};
 
   --global-tip-block: #42b983;
   --global-tip-block-bg: #e2f5ec;
@@ -48,19 +48,19 @@
 }
 
 html[data-theme="dark"] {
-  --global-bg-color: #{$bark-color};
-  --global-code-bg-color: #{$bark-raised};
+  --global-bg-color: #{$soil-color};
+  --global-code-bg-color: #{$soil-raised};
   --global-text-color: #{$ink-inverse};
   --global-text-color-light: #{$ink-inverse-muted};
   --global-theme-color: #{$leaf-color-soft};
   --global-hover-color: #{$cyan-color};
   --global-hover-text-color: #{$white-color};
-  --global-footer-bg-color: #{$grey-color-light};
-  --global-footer-text-color: #{$grey-color-dark};
-  --global-footer-link-color: #{$black-color};
+  --global-footer-bg-color: #{$soil-raised};
+  --global-footer-text-color: #{$ink-inverse-muted};
+  --global-footer-link-color: #{$ink-inverse};
   --global-distill-app-color: #{$grey-color-light};
   --global-divider-color: #{$bark-divider};
-  --global-card-bg-color: #{$bark-raised};
+  --global-card-bg-color: #{$soil-raised};
 
   --global-tip-block: #42b983;
   --global-tip-block-bg: #e2f5ec;

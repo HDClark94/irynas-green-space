@@ -40,12 +40,22 @@ OUT = pathlib.Path(__file__).resolve().parent.parent / "assets" / "img"
 # so tiles and the logo need only one version each.
 GREENS = ["#2f7d4f", "#4a9d6e", "#6fbf8e", "#8fcfa5", "#3c6b4a"]
 
-# The site's heading face, loaded from the committed TTF so the wordmark and the
-# page use the same letterforms. SIL Open Font Licence, so redistributing the
-# outlines baked into the SVG is explicitly allowed.
-_FONT_FILE = pathlib.Path(__file__).resolve().parent / "fonts" / "Lora.ttf"
-matplotlib.font_manager.fontManager.addfont(str(_FONT_FILE))
-NAME_FONT = matplotlib.font_manager.FontProperties(fname=str(_FONT_FILE)).get_name()
+# The wordmark is set in Optima - a macOS system face, and the one this site was
+# designed around. It is not libre, so if the artwork is ever regenerated
+# somewhere without it (a Linux CI runner, say) matplotlib would silently
+# substitute DejaVu Sans and quietly change the brand. So: fall back to the
+# committed Lora, loudly.
+#
+# If Optima's licence ever becomes a concern for a registered business, the
+# closest libre substitute for its flared Roman caps is Marcellus.
+_LORA = pathlib.Path(__file__).resolve().parent / "fonts" / "Lora.ttf"
+matplotlib.font_manager.fontManager.addfont(str(_LORA))
+
+if any(f.name == "Optima" for f in matplotlib.font_manager.fontManager.ttflist):
+    NAME_FONT = "Optima"
+else:
+    NAME_FONT = matplotlib.font_manager.FontProperties(fname=str(_LORA)).get_name()
+    print(f"!! Optima not installed - wordmark falling back to {NAME_FONT}")
 
 SURFACE = {"light": "#fbfdfa", "dark": "#141a16"}
 BANNER_GREENS = {

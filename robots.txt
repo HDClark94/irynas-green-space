@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://hdclark94.github.io/sitemap.xml

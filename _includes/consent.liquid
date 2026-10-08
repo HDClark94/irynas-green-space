@@ -1,0 +1,28 @@
+{% if site.consent.enabled %}
+  <!--
+    Hidden until consent.js decides there is no stored decision, so it never
+    flashes for someone who has already answered.
+  -->
+  <div
+    id="consent-banner"
+    class="consent-banner"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="consent-title"
+    hidden
+  >
+    <div class="consent-inner">
+      <h2 id="consent-title" class="consent-title">Cookies and embedded content</h2>
+      <p class="consent-body">
+        This site stores nothing that identifies you and uses no analytics. The only optional item is the map, which is loaded from
+        {% if site.map.provider == 'osm' %}OpenStreetMap{% else %}Google Maps{% endif %}
+        — loading it shares your IP address with them and lets them set cookies. Nothing loads until you choose.
+        <a href="{{ '/privacy/' | relative_url }}">How we handle data</a>.
+      </p>
+      <div class="consent-actions">
+        <button type="button" id="consent-reject" class="consent-btn consent-btn--ghost">Reject</button>
+        <button type="button" id="consent-accept" class="consent-btn">Accept</button>
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -67,6 +67,15 @@ google_site_verification:
 bing_site_verification:
 
 # -----------------------------------------------------------------------------
+# Consent
+# -----------------------------------------------------------------------------
+# Gates third-party embeds behind a prior-consent banner. Set enabled: false
+# only if the site stops loading anything third-party at all.
+
+consent:
+  enabled: true
+
+# -----------------------------------------------------------------------------
 # Map
 # -----------------------------------------------------------------------------
 # Shown above the footer on every page.

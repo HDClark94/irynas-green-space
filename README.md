@@ -51,19 +51,58 @@ small pill on the card — use it for "Open", "By appointment", "Coming soon".
 
 ## Map
 
-A map sits above the footer on every page, configured under `map:` in
-`_config.yml`. **The coordinates are a placeholder — Tavira in the Algarve.**
+A map sits in the footer, to the right of the copyright, on every page. It is
+configured under `map:` in `_config.yml`. **The coordinates are a placeholder — Tavira in the Algarve.**
 Replace `lat` and `lng` with the real address before launch: right-click the
 spot in Google Maps and the coordinates are the first item in the menu.
 
-`provider` accepts `google` or `osm`. Google is the default because it is what
-most visitors expect, but worth knowing: the embed loads Google resources and
-sets cookies on every page view, with no consent step. That is the same GDPR
-problem that led to the fonts being self-hosted here, and it applies more
-strongly to a map on every page. Switching to `osm` is a one-word change,
-needs no API key, and sends nothing to Google.
+`provider` accepts `google` or `osm`. Either way the embed is **gated behind
+consent** — see below. Switching to `osm` needs no API key and sends far less
+to a third party, which makes the consent question less fraught.
 
-Set `enabled: false` to remove it entirely.
+Set `enabled: false` to remove the map entirely.
+
+## Consent and cookies
+
+The site is built to operate in the EU, which means third-party content must not
+load until the visitor agrees.
+
+The important part is _where_ that is enforced. `_includes/map.liquid` renders a
+**placeholder**, not an iframe — it carries the embed URL in a `data-consent-src`
+attribute, and `assets/js/consent.js` only builds the real iframe after a
+decision. A banner shown over an already-loading embed would be worthless: by
+then the provider has the visitor's IP and has set its cookies. If you add any
+other third-party embed — a video, a social feed, a Stripe Buy Button — put it
+behind the same attribute rather than dropping an iframe straight into a page.
+
+Accept and Reject are deliberately the same size and weight. Regulators have
+repeatedly found that making refusal harder than acceptance invalidates the
+consent collected.
+
+The decision is stored in local storage as `igs.consent.v1`, and can be changed
+from **Cookie settings** in the footer. Storing the answer does not itself need
+consent: it exists only to honour the choice.
+
+What the site stores, and why none of it needs consent:
+
+| Key              | Purpose                                            |
+| ---------------- | -------------------------------------------------- |
+| `igs.consent.v1` | Remembers the answer above                         |
+| `theme`          | Light or dark mode, if the visitor uses the toggle |
+
+There is no analytics, no advertising and no tracking on this site. If you add
+analytics later, it must go behind the same gate, and the privacy page needs
+updating to say so.
+
+### The policy pages are drafts
+
+`_pages/privacy.md` and `_pages/terms.md` are written against how the site
+actually behaves, and cover the headings EU rules require — but **they are
+drafts and have not been reviewed by anyone qualified.** Every place needing a
+real answer is marked _to be confirmed_: the trading entity, the supervisory
+authority, VAT treatment, delivery terms, who pays return postage, and record
+retention. Have them checked before taking the first order. An incomplete
+privacy notice is itself a breach.
 
 ## Payments
 

@@ -25,6 +25,7 @@ import sys
 
 import numpy as np
 import matplotlib
+import matplotlib.font_manager
 
 matplotlib.use("Agg")
 matplotlib.rcParams["svg.fonttype"] = "path"
@@ -39,7 +40,12 @@ OUT = pathlib.Path(__file__).resolve().parent.parent / "assets" / "img"
 # so tiles and the logo need only one version each.
 GREENS = ["#2f7d4f", "#4a9d6e", "#6fbf8e", "#8fcfa5", "#3c6b4a"]
 
-NAME_FONT = "Optima"  # humanist sans; see scripts/README.md on substituting it
+# The site's heading face, loaded from the committed TTF so the wordmark and the
+# page use the same letterforms. SIL Open Font Licence, so redistributing the
+# outlines baked into the SVG is explicitly allowed.
+_FONT_FILE = pathlib.Path(__file__).resolve().parent / "fonts" / "Lora.ttf"
+matplotlib.font_manager.fontManager.addfont(str(_FONT_FILE))
+NAME_FONT = matplotlib.font_manager.FontProperties(fname=str(_FONT_FILE)).get_name()
 
 SURFACE = {"light": "#fbfdfa", "dark": "#141a16"}
 BANNER_GREENS = {
@@ -143,12 +149,8 @@ def logo():
     save(fig, OUT / "logo.svg", None)
 
 
-def favicon():
-    # Rendered at 16 px, so: fewer leaves, heavier strokes, stronger fill.
-    fig, ax = new_axes(1.0, 1.0)
-    nested_leaf(ax, 0.5, 0.07, 0.88, ["#2f7d4f", "#6fbf8e"],
-                alpha=0.45, lw=3.0, scales=(1.0, 0.58), width=0.44)
-    save(fig, OUT / "leaf_icon.svg", None)
+# assets/img/leaf_icon.svg is hand-written, not generated: at 16px a favicon
+# needs a handful of clean curves, not a 140-point outline. Edit it directly.
 
 
 def wordmark():
@@ -216,6 +218,5 @@ def tiles():
 for mode in ("light", "dark"):
     banner(mode)
 logo()
-favicon()
 wordmark()
 tiles()

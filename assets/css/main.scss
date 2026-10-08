@@ -8,10 +8,10 @@ $max-content-width: {{ site.max_width }};
 
 @import
   "variables",
+  "fonts",
   "themes",
   "layout",
   "base",
-  "cv",
   "font-awesome/fontawesome",
   "font-awesome/brands",
   "font-awesome/solid",

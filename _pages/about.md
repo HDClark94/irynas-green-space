@@ -4,17 +4,11 @@ title: about
 permalink: /
 subtitle: A refill shop, eco laundry, sound therapy room and safe space.
 
-banner: banner-light.svg
-banner_dark: banner-dark.svg
-banner_alt: Soft overlapping leaf shapes in green
-
-profile:
-  align: right
-  image: logo.svg
-  image_circular: false
-  more_info: >
-    <!-- Address, opening hours and anything else that belongs beside the
-         logo. Keep it short — three or four lines at most. -->
+# Full-screen photograph at the top of the page. To go back to the generated
+# leaf strip instead, swap these for:  banner: banner-light.svg
+#                                      banner_dark: banner-dark.svg
+hero: assets/img/hero.jpg
+hero_alt: A rainbow arcing over palm trees and a tiled temple roof
 
 news: true # shows the latest updates on this page
 social: true # shows contact icons at the bottom

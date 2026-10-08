@@ -39,6 +39,8 @@ OUT = pathlib.Path(__file__).resolve().parent.parent / "assets" / "img"
 # so tiles and the logo need only one version each.
 GREENS = ["#2f7d4f", "#4a9d6e", "#6fbf8e", "#8fcfa5", "#3c6b4a"]
 
+NAME_FONT = "Optima"  # humanist sans; see scripts/README.md on substituting it
+
 SURFACE = {"light": "#fbfdfa", "dark": "#141a16"}
 BANNER_GREENS = {
     "light": ["#2f7d4f", "#4a9d6e", "#6fbf8e", "#a8d5b5", "#cbe6d4"],
@@ -95,7 +97,10 @@ def save(fig, path, facecolor):
                 metadata={"Date": None})
     print("wrote", path.relative_to(OUT.parent.parent))
     if "--png" in sys.argv:
-        fig.savefig(path.with_suffix(".png"), dpi=110, facecolor=facecolor or "white")
+        # Mirror the SVG: a transparent asset previews transparent.
+        fig.savefig(path.with_suffix(".png"), dpi=110,
+                    facecolor=facecolor or "none",
+                    transparent=(facecolor is None))
     plt.close(fig)
 
 
@@ -121,27 +126,42 @@ def banner(mode):
     save(fig, OUT / f"banner-{mode}.svg", SURFACE[mode])
 
 
-# -- logo and favicon --------------------------------------------------------
+# -- the site mark -----------------------------------------------------------
+# Three nested leaves, sharing a base. Used as the logo, the favicon, the navbar
+# mark and the refill tile, so the site has one symbol rather than four.
+
+def nested_leaf(ax, cx, base_y, height, colours, alpha=0.30, lw=1.4,
+                scales=(1.0, 0.72, 0.46), width=0.42):
+    for i, scale in enumerate(scales):
+        draw_leaf(ax, (cx, base_y), np.deg2rad(90), height * scale,
+                  colours[i % len(colours)], alpha=alpha, z=i, lw=lw, width=width)
+
 
 def logo():
-    fig, ax = new_axes(3.2, 3.2)
-    # Three leaves from a shared base - a simple sprig.
-    for angle, length, colour, z in [
-        (np.deg2rad(90), 2.5, "#2f7d4f", 3),
-        (np.deg2rad(142), 1.8, "#4a9d6e", 2),
-        (np.deg2rad(38), 1.8, "#6fbf8e", 1),
-    ]:
-        draw_leaf(ax, (1.6, 0.35), angle, length, colour, alpha=0.42, z=z, lw=1.4)
-    ax.plot([1.6, 1.6], [0.0, 0.5], color="#2f7d4f", lw=1.6, zorder=0,
-            solid_capstyle="round", clip_on=False)
+    fig, ax = new_axes(3.0, 3.0)
+    nested_leaf(ax, 1.5, 0.3, 2.45, GREENS, alpha=0.30, lw=1.5)
     save(fig, OUT / "logo.svg", None)
 
 
 def favicon():
+    # Rendered at 16 px, so: fewer leaves, heavier strokes, stronger fill.
     fig, ax = new_axes(1.0, 1.0)
-    draw_leaf(ax, (0.5, 0.08), np.deg2rad(90), 0.86, "#2f7d4f",
-              alpha=0.55, z=1, lw=2.2, width=0.46)
+    nested_leaf(ax, 0.5, 0.07, 0.88, ["#2f7d4f", "#6fbf8e"],
+                alpha=0.45, lw=3.0, scales=(1.0, 0.58), width=0.44)
     save(fig, OUT / "leaf_icon.svg", None)
+
+
+def wordmark():
+    """White mark + name, to sit over the hero photograph."""
+    W, H = 10.0, 5.2
+    fig, ax = new_axes(W, H)
+    white = ["#ffffff", "#ffffff", "#ffffff"]
+    nested_leaf(ax, W / 2, H * 0.60, H * 0.36, white, alpha=0.22, lw=2.0)
+    ax.text(W / 2, H * 0.40, "Iryna's", ha="center", va="center",
+            color="#ffffff", fontsize=27, fontname=NAME_FONT, alpha=0.95)
+    ax.text(W / 2, H * 0.23, "GREEN SPACE", ha="center", va="center",
+            color="#ffffff", fontsize=54, fontname=NAME_FONT, alpha=0.98)
+    save(fig, OUT / "wordmark.svg", None)
 
 
 # -- offering tiles ----------------------------------------------------------
@@ -149,10 +169,8 @@ def favicon():
 # differs so the four read as distinct at a glance.
 
 def tile_refill(ax, W, H):
-    # Nested arcs - a vessel being filled, drawn as concentric leaf outlines.
-    for i, scale in enumerate([1.0, 0.72, 0.46]):
-        draw_leaf(ax, (W / 2, H * 0.12), np.deg2rad(90), H * 0.78 * scale,
-                  GREENS[i], alpha=0.30, z=i, lw=1.4, width=0.42)
+    # The site mark itself - the refill shop is where the symbol came from.
+    nested_leaf(ax, W / 2, H * 0.12, H * 0.78, GREENS)
 
 
 def tile_laundry(ax, W, H):
@@ -199,4 +217,5 @@ for mode in ("light", "dark"):
     banner(mode)
 logo()
 favicon()
+wordmark()
 tiles()

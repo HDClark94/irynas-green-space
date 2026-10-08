@@ -1283,3 +1283,102 @@ nav[data-toggle="toc"] {
   letter-spacing: 0.02em;
   color: var(--global-text-color-light);
 }
+
+// Full-bleed hero
+// Breaks out of .container (which is max-width and centred) and cancels its
+// top margin, so the photograph fills the viewport below the fixed navbar.
+// Scrolling past it reveals the page proper.
+.hero {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: -3rem; // cancels the .container mt-5
+  height: calc(100vh - 56px); // 56px is the fixed navbar
+  min-height: 380px;
+  overflow: hidden;
+
+  figure,
+  picture {
+    display: block;
+    height: 100%;
+    margin: 0;
+  }
+
+  .hero-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Darkens the sky just enough for white type to hold, without flattening the photo.
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  // The linear pass is weakest around 42%, which is exactly where the wordmark
+  // sits - so a soft radial darkens only behind the type, leaving the sky bright.
+  background: radial-gradient(ellipse 52% 40% at 50% 44%, rgba(12, 32, 22, 0.38) 0%, rgba(12, 32, 22, 0) 72%),
+    linear-gradient(180deg, rgba(12, 32, 22, 0.3) 0%, rgba(12, 32, 22, 0.08) 42%, rgba(12, 32, 22, 0.45) 100%);
+}
+
+.hero-wordmark {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  width: min(66vw, 540px);
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.42));
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  animation: hero-nudge 2.4s ease-in-out infinite;
+
+  &:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+}
+
+@keyframes hero-nudge {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll {
+    animation: none;
+  }
+}
+
+// Breathing room between the hero and the first paragraph.
+.hero + span + .post-header,
+.hero ~ .post-header {
+  padding-top: 2.6rem;
+}
+
+// Small leaf mark beside the site name in the navbar.
+.navbar-leaf {
+  height: 1.5rem;
+  width: auto;
+  margin-right: 0.45rem;
+  vertical-align: -0.3rem;
+}

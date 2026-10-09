@@ -62,6 +62,39 @@ to a third party, which makes the consent question less fraught.
 
 Set `enabled: false` to remove the map entirely.
 
+## Cost breakdowns
+
+Every product on the shop page opens a **Where your money goes** panel showing
+what reaches the maker, shipping and import, VAT, card fees and the shop.
+
+The figures live in `_data/products.yml` as absolute amounts, not percentages,
+so they can be checked rather than taken on trust. `scripts/check_products.py`
+verifies that every breakdown sums to its price to the cent and that any VAT
+line matches the configured rate — and it runs in CI, so a wrong figure fails
+the build instead of quietly misleading a customer. That check is the feature;
+the panel is just how it is displayed.
+
+**VAT is computed from the gross price:**
+
+```
+vat = gross × rate / (100 + rate)
+```
+
+Not `gross × rate/100`. At 23% that difference is about a fifth of the tax line,
+and on a page about honesty it would be a bad place to slip. The check enforces
+the correct formula.
+
+`vat_rate` in `_config.yml` is **23** — Portugal mainland. The UK is 20, and
+Madeira and the Azores differ. Change it there and update the figures; the check
+will tell you if they no longer agree.
+
+Segment colours are validated categorical slots checked against this site's own
+tan and soil backgrounds, not the defaults. Several pairs that look distinct to
+full colour vision collapse under deuteranopia, so if you swap them for prettier
+earth tones, re-run the validator rather than trusting your eye. The table under
+the bar carries a figure and a swatch on every row, so identity never rests on
+colour alone.
+
 ## Consent and cookies
 
 The site is built to operate in the EU, which means third-party content must not

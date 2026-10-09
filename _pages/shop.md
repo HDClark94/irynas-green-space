@@ -27,7 +27,13 @@ repository fails the build if they ever stop doing so.
       {% if item.note %}<p class="shop-note">{{ item.note }}</p>{% endif %}
       <p class="shop-desc">{{ item.description }}</p>
       <div class="shop-foot">
-        <span class="shop-price">{{ site.shop.currency | default: "€" }}{{ item.price }}</span>
+        <span class="shop-price">
+          {%- assign cur = site.shop.currency | default: "€" -%}
+          {%- assign cents = item.price | times: 100 | round -%}
+          {%- assign whole = cents | divided_by: 100 -%}
+          {%- assign frac = cents | modulo: 100 -%}
+          {{ cur }}{{ whole }}.{% if frac < 10 %}0{% endif %}{{ frac }}
+        </span>
         {% if item.origin %}<span class="shop-origin">{{ item.origin }}</span>{% endif %}
       </div>
       {% include cost_breakdown.liquid item=item %}

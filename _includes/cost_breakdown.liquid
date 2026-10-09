@@ -1,20 +1,30 @@
 {% assign item = include.item %}
 {% if item.breakdown %}
   {% assign cur = site.shop.currency | default: '€' %}
+
+  {%- comment -%}
+    Liquid prints the YAML number 68.00 as "68.0", so every money value goes
+    through integer cents to guarantee two decimals. Captured into a variable
+    rather than written inline: inline whitespace control gets reflowed by the
+    formatter, and the zero-padding then silently stops working.
+  {%- endcomment -%}
+  {%- assign pc = item.price | times: 100 | round -%}
+  {%- assign pw = pc | divided_by: 100 -%}
+  {%- assign pf = pc | modulo: 100 -%}
+  {%- capture price_fmt -%}
+    {{ cur }}{{ pw }}.{% if pf < 10 %}0{% endif %}{{ pf }}
+  {%- endcapture -%}
+
   <details class="cost">
     <summary class="cost-summary">Where your money goes</summary>
 
-    {% comment %}
+    {%- comment -%}
       The bar is supporting; the table below is authoritative. Several segment
       colours sit under 3:1 against the tan surface, which the palette validator
       flags as needing relief - the table, with a swatch and a figure on every
-      row, is that relief. Identity is never carried by colour alone.
-    {% endcomment %}
-    <div
-      class="cost-bar"
-      role="img"
-      aria-label="Proportional breakdown of the {{ cur }}{{ item.price }} price"
-    >
+      row, is that relief. Identity never rests on colour alone.
+    {%- endcomment -%}
+    <div class="cost-bar" role="img" aria-label="Proportional breakdown of the {{ price_fmt }} price">
       {% for line in item.breakdown %}
         {% assign pct = line.amount | times: 100.0 | divided_by: item.price %}
         <span class="cost-seg cost-seg--{{ forloop.index }}" style="width: {{ pct }}%"></span>
@@ -25,6 +35,12 @@
       <tbody>
         {% for line in item.breakdown %}
           {% assign pct = line.amount | times: 100.0 | divided_by: item.price %}
+          {%- assign lc = line.amount | times: 100 | round -%}
+          {%- assign lw = lc | divided_by: 100 -%}
+          {%- assign lf = lc | modulo: 100 -%}
+          {%- capture amount_fmt -%}
+            {{ cur }}{{ lw }}.{% if lf < 10 %}0{% endif %}{{ lf }}
+          {%- endcapture -%}
           <tr>
             <th scope="row">
               <span class="cost-dot cost-seg--{{ forloop.index }}" aria-hidden="true"></span>
@@ -34,23 +50,13 @@
               {%- endif %}
             </th>
             <td class="cost-pct">{{ pct | round: 0 }}%</td>
-            <td class="cost-amt">
-              {{ cur -}}
-              {{- line.amount }}
-            </td>
+            <td class="cost-amt">{{ amount_fmt }}</td>
           </tr>
         {% endfor %}
         <tr class="cost-total">
           <th scope="row">Total</th>
           <td></td>
-          <td class="cost-amt">
-            {%- assign tcents = item.price | times: 100 | round -%}
-            {%- assign twhole = tcents | divided_by: 100 -%}
-            {%- assign tfrac = tcents | modulo: 100 -%}
-            {{ cur -}}
-            {{- twhole }}.{% if tfrac < 10 %}0{% endif -%}
-            {{- tfrac }}
-          </td>
+          <td class="cost-amt">{{ price_fmt }}</td>
         </tr>
       </tbody>
     </table>

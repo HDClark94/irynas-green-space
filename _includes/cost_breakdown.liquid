@@ -44,8 +44,12 @@
           <th scope="row">Total</th>
           <td></td>
           <td class="cost-amt">
+            {%- assign tcents = item.price | times: 100 | round -%}
+            {%- assign twhole = tcents | divided_by: 100 -%}
+            {%- assign tfrac = tcents | modulo: 100 -%}
             {{ cur -}}
-            {{- item.price }}
+            {{- twhole }}.{% if tfrac < 10 %}0{% endif -%}
+            {{- tfrac }}
           </td>
         </tr>
       </tbody>

@@ -9,7 +9,7 @@
 
 PYTHON ?= python3
 
-.PHONY: help art photos serve build format check clean
+.PHONY: help art photos serve build format check check-products clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-8s\033[0m %s\n", $$1, $$2}'
@@ -29,8 +29,11 @@ build: ## Production build into _site
 format: ## Apply Prettier formatting (CI enforces this)
 	npx prettier . --write
 
-check: ## Check formatting without writing (what CI runs)
+check: check-products ## Everything CI runs: formatting and price integrity
 	npx prettier . --check
+
+check-products: ## Verify every cost breakdown sums to its price
+	$(PYTHON) scripts/check_products.py
 
 clean: ## Remove build output and local raster previews
 	rm -rf _site .jekyll-cache

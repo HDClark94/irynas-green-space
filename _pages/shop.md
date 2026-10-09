@@ -10,6 +10,13 @@ nav_order: 2
 Everything here is also on the shelf in the shop, where you can hear it before
 you buy. Online payment is handled by Stripe — card, Apple Pay and Google Pay.
 
+Every price opens up. **Where your money goes** on each item shows what reaches
+the maker, what shipping and import cost, what the tax authority takes, and what
+stays with the shop. The figures add up to the price exactly — a check in the
+repository fails the build if they ever stop doing so.
+
+<!-- PRICES AND BREAKDOWNS ARE ILLUSTRATIVE until real figures replace them. -->
+
 <div class="shop-grid">
   {% for item in site.data.products %}
     <div class="shop-card">
@@ -20,9 +27,10 @@ you buy. Online payment is handled by Stripe — card, Apple Pay and Google Pay.
       {% if item.note %}<p class="shop-note">{{ item.note }}</p>{% endif %}
       <p class="shop-desc">{{ item.description }}</p>
       <div class="shop-foot">
-        <span class="shop-price">{{ item.price }}</span>
+        <span class="shop-price">{{ site.shop.currency | default: "€" }}{{ item.price }}</span>
         {% if item.origin %}<span class="shop-origin">{{ item.origin }}</span>{% endif %}
       </div>
+      {% include cost_breakdown.liquid item=item %}
       {% if item.checkout_url and item.checkout_url != "" %}
         <a class="shop-buy" href="{{ item.checkout_url }}">Buy</a>
       {% else %}

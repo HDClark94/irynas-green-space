@@ -1,53 +1,155 @@
 # The shop.
 #
 # checkout_url is a Stripe Payment Link. Leave it blank and the card shows
-# "Ask in store" instead of a buy button, so an item can be listed before it is
-# set up to sell online. See the Payments section of README.md.
+# "Ask in store" instead of a buy button. See the Payments section of README.md.
 #
-# image is optional and looks in assets/img/shop/.
+# PRICES AND BREAKDOWNS BELOW ARE ILLUSTRATIVE. Replace with real figures before
+# launch. scripts/check_products.py verifies that every breakdown sums exactly to
+# its price and that the VAT line matches the configured rate - run `make check`.
+#
+# VAT is 23% (Portugal mainland) and is computed from the GROSS price:
+#   vat = gross * 23 / (100 + 23)
+# Not gross * 0.23. Getting this wrong overstates the tax by about a fifth,
+# which on a page about honesty would be an unfortunate place to slip.
 
 - name: Hand-hammered singing bowl
   note: Medium, around 18 cm
   description: >
     Hammered by hand in the Kathmandu valley. Deep, long sustain with a slow
     beat. Comes with a suede mallet and a ring cushion.
-  price: "To be confirmed"
+  price: 68.00
   origin: Nepal
   checkout_url:
+  breakdown:
+    - label: Maker in Nepal
+      amount: 22.68
+      note: paid to the workshop, before shipping
+    - label: Import and shipping
+      amount: 8.64
+      note: freight, duty and getting it here
+    - label: VAT (23%)
+      amount: 12.72
+      note: collected on behalf of the tax authority
+    - label: Card fees
+      amount: 1.27
+      note: what the payment processor takes
+    - label: The shop
+      amount: 22.69
+      note: rent, utilities, wages and restocking
 
 - name: Small singing bowl
   note: Around 12 cm
   description: >
     Higher and brighter than the medium. Light enough to hold in the palm while
     it rings, which is how most people prefer to use one.
-  price: "To be confirmed"
+  price: 42.00
   origin: Nepal
   checkout_url:
+  breakdown:
+    - label: Maker in Nepal
+      amount: 13.97
+      note: paid to the workshop, before shipping
+    - label: Import and shipping
+      amount: 5.32
+      note: freight, duty and getting it here
+    - label: VAT (23%)
+      amount: 7.85
+      note: collected on behalf of the tax authority
+    - label: Card fees
+      amount: 0.88
+      note: what the payment processor takes
+    - label: The shop
+      amount: 13.98
+      note: rent, utilities, wages and restocking
 
 - name: Tingsha cymbals
   description: >
     A bonded pair on a leather cord. Struck to open and close a session; the
     note carries much further than the size suggests.
-  price: "To be confirmed"
+  price: 34.00
   origin: Nepal
   checkout_url:
+  breakdown:
+    - label: Maker in Nepal
+      amount: 11.29
+      note: paid to the workshop, before shipping
+    - label: Import and shipping
+      amount: 4.30
+      note: freight, duty and getting it here
+    - label: VAT (23%)
+      amount: 6.36
+      note: collected on behalf of the tax authority
+    - label: Card fees
+      amount: 0.76
+      note: what the payment processor takes
+    - label: The shop
+      amount: 11.29
+      note: rent, utilities, wages and restocking
 
 - name: Suede mallet
   description: >
     For rimming a bowl rather than striking it. A different voice from the
     wooden striker, and gentler on the rim.
-  price: "To be confirmed"
+  price: 9.50
   checkout_url:
+  breakdown:
+    - label: Maker / supplier
+      amount: 3.08
+      note: paid to the workshop, before shipping
+    - label: Import and shipping
+      amount: 1.17
+      note: freight, duty and getting it here
+    - label: VAT (23%)
+      amount: 1.78
+      note: collected on behalf of the tax authority
+    - label: Card fees
+      amount: 0.39
+      note: what the payment processor takes
+    - label: The shop
+      amount: 3.08
+      note: rent, utilities, wages and restocking
 
 - name: Ring cushion
   description: >
     Woven cushion so a bowl can sit and ring freely without being damped by the
     surface underneath it.
-  price: "To be confirmed"
+  price: 12.00
   checkout_url:
+  breakdown:
+    - label: Maker / supplier
+      amount: 3.92
+      note: paid to the workshop, before shipping
+    - label: Import and shipping
+      amount: 1.49
+      note: freight, duty and getting it here
+    - label: VAT (23%)
+      amount: 2.24
+      note: collected on behalf of the tax authority
+    - label: Card fees
+      amount: 0.43
+      note: what the payment processor takes
+    - label: The shop
+      amount: 3.92
+      note: rent, utilities, wages and restocking
 
 - name: Incense and holder
   description: >
     Rolled incense and a simple wooden holder.
-  price: "To be confirmed"
+  price: 8.50
   checkout_url:
+  breakdown:
+    - label: Maker / supplier
+      amount: 2.74
+      note: paid to the workshop, before shipping
+    - label: Import and shipping
+      amount: 1.04
+      note: freight, duty and getting it here
+    - label: VAT (23%)
+      amount: 1.59
+      note: collected on behalf of the tax authority
+    - label: Card fees
+      amount: 0.38
+      note: what the payment processor takes
+    - label: The shop
+      amount: 2.75
+      note: rent, utilities, wages and restocking

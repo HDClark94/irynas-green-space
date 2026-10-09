@@ -1675,3 +1675,110 @@ h6,
   gap: 0.9rem;
   margin-left: 0.6rem;
 }
+
+// Cost breakdown
+// Segment colours are validated categorical slots, checked against this site's
+// own tan and soil surfaces. Several fall under 3:1 on tan, which the validator
+// flags as requiring relief - the table beneath carries a figure and a swatch on
+// every row, so identity never rests on colour alone.
+.cost {
+  margin-top: 0.9rem;
+  border-top: 1px solid var(--global-divider-color);
+  padding-top: 0.7rem;
+}
+
+.cost-summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--global-theme-color);
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before {
+    content: "▸";
+    display: inline-block;
+    margin-right: 0.4rem;
+    transition: transform 0.15s ease;
+  }
+}
+
+details[open] > .cost-summary::before {
+  transform: rotate(90deg);
+}
+
+.cost-bar {
+  display: flex;
+  // A 2px gap between fills, so adjacent segments read as separate even when
+  // their colours are close.
+  gap: 2px;
+  height: 10px;
+  margin: 0.8rem 0 0.6rem;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.cost-seg {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+}
+
+.cost-dot {
+  display: inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  margin-right: 0.45rem;
+  border-radius: 2px;
+  vertical-align: -1px;
+}
+
+.cost-table {
+  width: 100%;
+  font-size: 0.82rem;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 0.28rem 0;
+    border: 0;
+    font-weight: 400;
+    vertical-align: top;
+  }
+
+  th {
+    text-align: left;
+  }
+}
+
+.cost-note {
+  display: block;
+  margin-left: 1.07rem;
+  font-size: 0.74rem;
+  color: var(--global-text-color-light);
+}
+
+.cost-pct,
+.cost-amt {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.cost-pct {
+  color: var(--global-text-color-light);
+  padding-right: 0.7rem !important;
+}
+
+.cost-total {
+  border-top: 1px solid var(--global-divider-color);
+
+  th,
+  .cost-amt {
+    font-weight: 600;
+    padding-top: 0.45rem !important;
+  }
+}

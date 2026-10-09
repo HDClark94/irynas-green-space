@@ -1,0 +1,54 @@
+{% assign item = include.item %}
+{% if item.breakdown %}
+  {% assign cur = site.shop.currency | default: '€' %}
+  <details class="cost">
+    <summary class="cost-summary">Where your money goes</summary>
+
+    {% comment %}
+      The bar is supporting; the table below is authoritative. Several segment
+      colours sit under 3:1 against the tan surface, which the palette validator
+      flags as needing relief - the table, with a swatch and a figure on every
+      row, is that relief. Identity is never carried by colour alone.
+    {% endcomment %}
+    <div
+      class="cost-bar"
+      role="img"
+      aria-label="Proportional breakdown of the {{ cur }}{{ item.price }} price"
+    >
+      {% for line in item.breakdown %}
+        {% assign pct = line.amount | times: 100.0 | divided_by: item.price %}
+        <span class="cost-seg cost-seg--{{ forloop.index }}" style="width: {{ pct }}%"></span>
+      {% endfor %}
+    </div>
+
+    <table class="cost-table">
+      <tbody>
+        {% for line in item.breakdown %}
+          {% assign pct = line.amount | times: 100.0 | divided_by: item.price %}
+          <tr>
+            <th scope="row">
+              <span class="cost-dot cost-seg--{{ forloop.index }}" aria-hidden="true"></span>
+              {{ line.label }}
+              {% if line.note -%}
+                <span class="cost-note">{{ line.note }}</span>
+              {%- endif %}
+            </th>
+            <td class="cost-pct">{{ pct | round: 0 }}%</td>
+            <td class="cost-amt">
+              {{ cur -}}
+              {{- line.amount }}
+            </td>
+          </tr>
+        {% endfor %}
+        <tr class="cost-total">
+          <th scope="row">Total</th>
+          <td></td>
+          <td class="cost-amt">
+            {{ cur -}}
+            {{- item.price }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </details>
+{% endif %}

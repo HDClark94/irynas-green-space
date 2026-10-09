@@ -17,3 +17,14 @@ $max-content-width: {{ site.max_width }};
   "font-awesome/solid",
   "font-awesome/regular"
 ;
+
+// Cost-breakdown segment colours, from _config.yml so the validated palette
+// lives in exactly one place.
+{% assign light = site.shop.breakdown_colors_light %}
+{% assign dark = site.shop.breakdown_colors_dark %}
+{% for c in light %}
+:root .cost-seg--{{ forloop.index }} { background-color: {{ c }}; }
+{% endfor %}
+{% for c in dark %}
+html[data-theme="dark"] .cost-seg--{{ forloop.index }} { background-color: {{ c }}; }
+{% endfor %}

@@ -24,3 +24,7 @@ jobs:
         run: npm install --save-dev --save-exact prettier @shopify/prettier-plugin-liquid
       - name: Prettier Check 🔎
         run: npx prettier . --check
+      - name: Check cost breakdowns reconcile 🧾
+        run: |
+          pip install pyyaml
+          python3 scripts/check_products.py

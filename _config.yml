@@ -67,6 +67,20 @@ google_site_verification:
 bing_site_verification:
 
 # -----------------------------------------------------------------------------
+# Shop
+# -----------------------------------------------------------------------------
+# Segment colours are the validated categorical slots 1-5, checked against this
+# site's own tan and soil surfaces rather than the defaults. Do not swap them
+# for prettier earth tones without re-running the validator: several pairs that
+# look distinct to full-colour vision collapse under deuteranopia.
+
+shop:
+  currency: "€"
+  vat_rate: 23 # Portugal mainland. UK is 20; Madeira and the Azores differ.
+  breakdown_colors_light: ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4"]
+  breakdown_colors_dark: ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181"]
+
+# -----------------------------------------------------------------------------
 # Consent
 # -----------------------------------------------------------------------------
 # Gates third-party embeds behind a prior-consent banner. Set enabled: false

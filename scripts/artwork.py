@@ -169,9 +169,9 @@ def wordmark():
     fig, ax = new_axes(W, H)
     white = ["#ffffff", "#ffffff", "#ffffff"]
     nested_leaf(ax, W / 2, H * 0.60, H * 0.36, white, alpha=0.22, lw=2.0)
-    ax.text(W / 2, H * 0.40, "Iryna's", ha="center", va="center",
+    ax.text(W / 2, H * 0.40, "Way Of", ha="center", va="center",
             color="#ffffff", fontsize=27, fontname=NAME_FONT, alpha=0.95)
-    ax.text(W / 2, H * 0.23, "GREEN SPACE", ha="center", va="center",
+    ax.text(W / 2, H * 0.23, "LIVING", ha="center", va="center",
             color="#ffffff", fontsize=54, fontname=NAME_FONT, alpha=0.98)
     save(fig, OUT / "wordmark.svg", None)
 

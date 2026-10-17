@@ -2,10 +2,10 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Iryna's Green Space # shown in the navbar and browser tab
-first_name: Iryna's
+title: Way Of Living # shown in the navbar and browser tab
+first_name: Way Of
 middle_name:
-last_name: Green Space
+last_name: Living
 email: # add a contact address, or leave blank to hide the icon
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A refill shop, eco laundry, sound therapy room and a small collection of

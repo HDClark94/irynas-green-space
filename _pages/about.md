@@ -14,7 +14,7 @@ news: true # shows the latest updates on this page
 social: true # shows contact icons at the bottom
 ---
 
-Iryna's Green Space is one room doing four things that belong together: a
+Way Of Living is one room doing four things that belong together: a
 **refill shop** so you can buy what you need without buying packaging again, an
 **eco laundry** that washes gently and cleanly, a **sound therapy** room, and a
 small collection of **singing bowls and instruments** from Nepal that you are

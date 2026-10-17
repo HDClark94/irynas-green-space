@@ -5,7 +5,21 @@ layout: default
 <div class="post">
   {% if page.hero %}
     <section class="hero">
-      {% include figure.liquid path=page.hero class="hero-img" sizes="100vw" alt=page.hero_alt %}
+      {% if page.hero_video %}
+        <video
+          class="hero-img"
+          src="{{ page.hero_video | prepend: '/assets/img/' | relative_url }}"
+          poster="{{ page.hero_poster | default: page.hero | relative_url }}"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-label="{{ page.hero_alt }}"
+        ></video>
+      {% else %}
+        {% include figure.liquid path=page.hero class="hero-img" sizes="100vw" alt=page.hero_alt %}
+      {% endif %}
       <div class="hero-scrim"></div>
       <img
         class="hero-wordmark"

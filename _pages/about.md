@@ -8,7 +8,9 @@ subtitle: A refill shop, eco laundry, sound therapy room and a few good instrume
 # leaf strip instead, swap these for:  banner: banner-light.svg
 #                                      banner_dark: banner-dark.svg
 hero: assets/img/hero.jpg
-hero_alt: A rainbow arcing over palm trees and a tiled temple roof
+hero_video: hero.mp4 # looping and muted; replaces hero.jpg on the home page
+hero_poster: assets/img/hero-poster.jpg # first frame, shown while the video loads
+hero_alt: A woman playing a singing bowl in a river beneath a waterfall
 
 news: true # shows the latest updates on this page
 social: true # shows contact icons at the bottom

@@ -1,4 +1,4 @@
-# Iryna's Green Space
+# Way Of Living
 
 Website template for a refill shop, eco laundry, sound therapy room and safe
 space.
